@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.white70,
+        backgroundColor: const Color.fromARGB(255, 72, 190, 211),
         actions: [
           IconButton(
             onPressed: () {

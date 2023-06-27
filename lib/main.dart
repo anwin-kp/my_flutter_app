@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_flutter_app/Screens/registration_screen.dart';
 
 import 'Screens/home_screen.dart';
 import 'Screens/login_screen.dart';
@@ -39,6 +40,7 @@ class _MyAppState extends State<MyApp> {
           '/': (ctx) => const SplashScreen(),
           LoginScreen.routeName: (ctx) => const LoginScreen(),
           HomeScreen.routeName: (ctx) => const HomeScreen(),
+          RegistrationScreen.routeName: (ctx) => const RegistrationScreen(),
         });
   }
 }
