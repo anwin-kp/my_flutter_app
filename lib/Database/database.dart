@@ -57,4 +57,13 @@ class DatabaseHelper {
 
     return null;
   }
+
+  static Future<void> deleteUserByEmail(String email) async {
+    final db = await database;
+    await db.delete(
+      'users',
+      where: 'email = ?',
+      whereArgs: [email],
+    );
+  }
 }

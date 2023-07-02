@@ -1,7 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../Common Files/constants.dart';
+import '../Widgets/confirm_logout_alertbox.dart';
+import '../Widgets/custom_app_bar.dart';
+import '../Widgets/side_drawer.dart';
 import 'login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,6 +20,30 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  Future<bool> _onBackPressed() async {
+    var shouldLogout = await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext dialogContext) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+          child: const LogoutConfirmationDialog(),
+        );
+      },
+    );
+    if (shouldLogout == true) {
+      logout();
+    }
+    return shouldLogout;
+  }
+
+  void logout() {
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
+      (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -22,73 +51,26 @@ class _HomeScreenState extends State<HomeScreen> {
         statusBarColor: Constants.whiteColor,
       ),
     );
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        title: const Text(
-          'Home Screen',
-          style: TextStyle(
-            color: Constants.blackColor,
-            fontWeight: FontWeight.bold,
-          ),
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: CustomAppBar(
+          context: context,
+          title: 'Home Screen',
         ),
-        backgroundColor: const Color.fromARGB(255, 72, 190, 211),
-        actions: [
-          IconButton(
-            onPressed: () {
-              // Perform logout functionality here
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                LoginScreen.routeName,
-                (route) => false,
-              );
-            },
-            icon: const Icon(Icons.logout),
+        drawer: const MyDrawer(),
+        body: Container(
+          decoration: const BoxDecoration(
+            // Add a background image
+            image: DecorationImage(
+              image: AssetImage('assets/home_screen_bg.jpg'),
+              fit: BoxFit.cover,
+            ),
           ),
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 83, 83, 82),
-              ),
-              child: Text(
-                'Navigation',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                // Handle navigation to item 1
-              },
-            ),
-            ListTile(
-              title: const Text('Item 2'),
-              onTap: () {
-                // Handle navigation to item 2
-              },
-            ),
-            // Add more ListTiles for additional menu items
-          ],
-        ),
-      ),
-      body: Container(
-        decoration: const BoxDecoration(
-          // Add a background image
-          image: DecorationImage(
-            image: AssetImage('assets/home_screen_bg.jpg'),
-            fit: BoxFit.cover,
+          child: Center(
+            child: Container(),
           ),
-        ),
-        child: Center(
-          child: Container(),
         ),
       ),
     );

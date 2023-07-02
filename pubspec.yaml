@@ -33,11 +33,17 @@ dependencies:
   local_auth: ^2.1.6
   sqflite: ^2.2.8+4
   path: ^1.8.2
+  path_provider: ^2.0.15
+  image_picker: ^1.0.0
+  shared_preferences: ^2.2.0
+  provider: ^6.0.5
+  another_flushbar: ^1.12.30
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  firebase_core: ^2.14.0
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +82,16 @@ flutter:
     - assets/pattern10.jpg
     - assets/pattern11.jpg
     - assets/pattern12.jpg
+    - assets/user_avatar.png
+    - assets/splash1.png
+    - assets/splash2.png
+    - assets/splash3.png
+    - assets/splash4.png
+    - assets/splash5.png
+    - assets/splash6.png
+    - assets/splash7.png
+    - assets/splash8.png
+    - assets/splash9.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
