@@ -52,8 +52,11 @@ class ExitConfirmationDialog extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-          child: const Text(
+          child: Text(
             'Confirm',
+            style: TextStyle(
+              color: Theme.of(context).textTheme.bodyMedium!.color,
+            ),
           ),
         ),
       ],

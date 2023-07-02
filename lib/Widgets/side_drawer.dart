@@ -10,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../Screens/about_screen.dart';
 import '../Screens/login_screen.dart';
 import '../Screens/profile_screen.dart';
 import '../Services/provider_service.dart';
@@ -169,7 +170,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ProfilePage(email: userEmail),
+                      builder: (context) => ProfilePageScreen(email: userEmail),
                     ),
                   );
                 },
@@ -201,7 +202,10 @@ class _MyDrawerState extends State<MyDrawer> {
                   ),
                 ),
                 onTap: () {
-                  // Handle navigation to about
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AboutPageScreen()),
+                  );
                 },
               ),
               ListTile(

@@ -4,15 +4,19 @@ import '../Models/user_model.dart';
 import '../Widgets/custom_app_bar.dart';
 import '../Widgets/side_drawer.dart';
 
-class ProfilePage extends StatelessWidget {
-  final String email;
+class ProfilePageScreen extends StatefulWidget {
+  final String? email;
+  const ProfilePageScreen({Key? key, required this.email}) : super(key: key);
+  static get routeName => '/profile_screen';
+  @override
+  State<ProfilePageScreen> createState() => _ProfilePageScreenState();
+}
 
-  const ProfilePage({Key? key, required this.email}) : super(key: key);
-
+class _ProfilePageScreenState extends State<ProfilePageScreen> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<User?>(
-      future: DatabaseHelper.getUserByEmail(email),
+      future: DatabaseHelper.getUserByEmail(widget.email!),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();

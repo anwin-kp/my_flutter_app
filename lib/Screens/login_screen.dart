@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -15,8 +16,8 @@ import 'package:my_flutter_app/Screens/home_screen.dart';
 import '../Common Files/global_functions.dart';
 import '../Database/database.dart';
 import '../Services/provider_service.dart';
-import '../Widgets/custom_alert_dialoge.dart';
 import '../Widgets/flush_bar.dart';
+import '../Widgets/login_first_alertbox.dart';
 import 'registration_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -48,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
     if (shouldExit == true) {
-      Navigator.of(context).pop();
+      exit(0);
     }
     return shouldExit;
   }
@@ -56,6 +57,9 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      FocusScope.of(context).unfocus();
+    });
     _getLastLoggedInEmail();
   }
 
@@ -83,13 +87,9 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       showDialog(
         context: context,
-        builder: (context) => CustomAlertDialog(
-          title: 'You need to login with credentials first',
-          content: 'Please try again.',
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        builder: (BuildContext context) {
+          return const LoginFirstAlertDialog();
+        },
       );
     }
 

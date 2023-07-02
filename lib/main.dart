@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_flutter_app/Screens/about_screen.dart';
+import 'package:my_flutter_app/Screens/profile_screen.dart';
 
 import 'package:my_flutter_app/Screens/registration_screen.dart';
 import 'package:my_flutter_app/Screens/settings_screen.dart';
@@ -57,6 +59,10 @@ class _MyAppState extends State<MyApp> {
             HomeScreen.routeName: (ctx) => const HomeScreen(),
             RegistrationScreen.routeName: (ctx) => const RegistrationScreen(),
             SettingsPage.routeName: (ctx) => const SettingsPage(),
+            AboutPageScreen.routeName: (ctx) => const AboutPageScreen(),
+            ProfilePageScreen.routeName: (ctx) =>  ProfilePageScreen(
+                  email: Provider.of<UserProvider>(context).loggedInEmail,
+                ),
           }),
     );
   }

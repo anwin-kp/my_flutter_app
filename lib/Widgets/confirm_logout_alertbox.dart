@@ -9,19 +9,19 @@ class LogoutConfirmationDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
-      title: const Text(
+      title: Text(
         'Logout Confirmation',
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 18.0,
-          color: Colors.black,
+          color: Theme.of(context).textTheme.bodyMedium!.color,
         ),
       ),
-      content: const Text(
+      content: Text(
         'Are you sure you want to log out?',
         style: TextStyle(
           fontSize: 16.0,
-          color: Colors.black87,
+          color: Theme.of(context).textTheme.bodyMedium!.color,
         ),
       ),
       actions: [

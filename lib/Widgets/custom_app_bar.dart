@@ -36,6 +36,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return AppBar(
+      elevation: 2,
       leadingWidth: width * 1,
       backgroundColor: Theme.of(context).textTheme.displayMedium!.color,
       iconTheme: const IconThemeData(color: Constants.textColor),
@@ -68,7 +69,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.only(right: 5.0, top: 5),
           child: IconButton(
             icon: const Icon(Icons.logout),
-            color: Constants.textColor,
+            color: Theme.of(context).textTheme.bodyMedium!.color,
             onPressed: () async {
               shouldLogout = await showDialog(
                 context: context,

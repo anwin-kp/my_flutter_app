@@ -116,8 +116,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       resizeToAvoidBottomInset: true,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        iconTheme: Theme.of(context).iconTheme,
         backgroundColor: Colors.transparent,
-        title: const Text('Registration'),
+        leadingWidth: 500,
+        leading: Row(
+          children: [
+            IconButton(
+              enableFeedback: false,
+              icon: Icon(
+                Icons.arrow_back_outlined,
+                color: Theme.of(context).textTheme.displayLarge!.color,
+              ),
+              onPressed: () {
+                FocusScope.of(context).unfocus();
+                Navigator.of(context).pop();
+              },
+            ),
+            Text(
+              'Registration',
+              style: TextStyle(
+                fontSize: 25,
+                color: Theme.of(context).textTheme.displayLarge!.color,
+              ),
+            ),
+          ],
+        ),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,

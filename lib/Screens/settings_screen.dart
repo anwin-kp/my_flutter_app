@@ -71,8 +71,8 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 60,
-        margin: const EdgeInsets.all(16.0),
+        height: 40,
+        margin: const EdgeInsets.fromLTRB(15, 15, 15, 25),
         child: ElevatedButton(
           onPressed: () async {
             shouldDeleteUser = await showDialog(

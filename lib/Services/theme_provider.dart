@@ -14,7 +14,7 @@ class ThemeProvider extends ChangeNotifier {
 
   ThemeData get darkTheme => ThemeData.dark().copyWith(
         primaryColor: Colors.black,
-        scaffoldBackgroundColor: Colors.black,
+        scaffoldBackgroundColor: const Color.fromARGB(255, 34, 87, 122),
         appBarTheme: AppBarTheme(
           color: Colors.black,
           elevation: 0,
@@ -33,12 +33,40 @@ class ThemeProvider extends ChangeNotifier {
           ).titleLarge,
         ),
         textTheme: const TextTheme(
-          titleLarge: TextStyle(
-            color: Color.fromARGB(255, 0, 0, 0),
+          titleSmall: TextStyle(
+            color: Colors.white,
             fontWeight: FontWeight.bold,
+            fontSize: 15,
           ),
-          bodyMedium: TextStyle(color: Colors.white),
-          displayMedium: TextStyle(color: Color.fromARGB(255, 34, 87, 122)),
+          titleLarge: TextStyle(
+              color: Colors.deepOrangeAccent,
+              fontWeight: FontWeight.bold,
+              fontSize: 25),
+          titleMedium: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+          bodyMedium: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+          bodyLarge: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+          ),
+          displayLarge: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+          ),
+          displayMedium: TextStyle(
+            color: Color.fromARGB(255, 34, 87, 122),
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+          ),
         ),
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.blue),
         // Add more properties as per your app's design requirements
@@ -46,11 +74,12 @@ class ThemeProvider extends ChangeNotifier {
 
   ThemeData get lightTheme => ThemeData.light().copyWith(
         primaryColor: Colors.white,
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: const Color.fromARGB(255, 199, 249, 204),
         appBarTheme: const AppBarTheme(
           color: Colors.white,
           elevation: 0,
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: IconThemeData(color: Colors.white),
+          actionsIconTheme: IconThemeData(color: Colors.black),
           toolbarTextStyle: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -61,12 +90,38 @@ class ThemeProvider extends ChangeNotifier {
           ),
         ),
         textTheme: const TextTheme(
-          titleLarge: TextStyle(
+          titleSmall: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
+            fontSize: 15,
           ),
-          bodyMedium: TextStyle(color: Colors.black),
-          displayMedium: TextStyle(color: Color.fromARGB(255, 199, 249, 204)),
+          titleLarge: TextStyle(
+              color: Colors.purple, fontWeight: FontWeight.bold, fontSize: 25),
+          titleMedium: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+          bodyMedium: TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+          bodyLarge: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.normal,
+            fontSize: 25,
+          ),
+          displayLarge: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+          ),
+          displayMedium: TextStyle(
+            color: Color.fromARGB(255, 199, 249, 204),
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+          ),
         ),
         colorScheme:
             ColorScheme.fromSwatch().copyWith(secondary: Colors.blueAccent),
