@@ -3,6 +3,7 @@ import '../Database/database.dart';
 import '../Models/user_model.dart';
 import '../Widgets/custom_app_bar.dart';
 import '../Widgets/side_drawer.dart';
+import 'edit_profile.dart';
 
 class ProfilePageScreen extends StatefulWidget {
   final String? email;
@@ -45,15 +46,45 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormField(
-                    initialValue: '${user.firstName} ${user.lastName}',
+                    initialValue: user.firstName,
                     readOnly: true,
                     style: textStyle,
                     decoration: InputDecoration(
-                      labelText: 'Username',
+                      labelText: 'First Name',
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
                           width: 2,
                           color: borderColor!,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 2,
+                          color: borderColor,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 2,
+                          color: borderColor,
+                        ),
+                      ),
+                      labelStyle: TextStyle(
+                        color: textStyle.color,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20.0),
+                  TextFormField(
+                    initialValue: user.lastName,
+                    readOnly: true,
+                    style: textStyle,
+                    decoration: InputDecoration(
+                      labelText: 'Last Name',
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 2,
+                          color: borderColor,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -136,6 +167,19 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
                 ],
               ),
             ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                      builder: (context) => EditProfileScreen(
+                            user: user,
+                          )),
+                );
+              },
+              backgroundColor: Colors.blue,
+              child: const Icon(Icons.edit),
+            ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           );
         }
       },

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:my_flutter_app/Widgets/confirm_delete_user.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Database/database.dart';
 import '../Services/provider_service.dart';
@@ -64,6 +65,7 @@ class _SettingsPageState extends State<SettingsPage> {
               value: themeProvider.isDarkModeEnabled,
               onChanged: (value) {
                 themeProvider.setDarkMode(value);
+                _saveThemePreference(value); // Save the theme preference
               },
             ),
           ],
@@ -107,5 +109,10 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ),
     );
+  }
+
+  Future<void> _saveThemePreference(bool isDarkModeEnabled) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isDarkModeEnabled', isDarkModeEnabled);
   }
 }

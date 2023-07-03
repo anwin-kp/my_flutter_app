@@ -120,16 +120,16 @@ class _MyDrawerState extends State<MyDrawer> {
                         Text(
                           userName!,
                           style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                          ),
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(height: 10),
                         Text(
                           userEmail!,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: 16,
                           ),
                         ),
                       ],
@@ -144,9 +144,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 ),
                 title: Text(
                   'Home',
-                  style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyMedium!.color,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onTap: () {
                   Navigator.of(context).pushAndRemoveUntil(
@@ -162,9 +160,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 ),
                 title: Text(
                   'Profile',
-                  style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyMedium!.color,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onTap: () {
                   Navigator.push(
@@ -182,9 +178,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 ),
                 title: Text(
                   'Settings',
-                  style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyMedium!.color,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onTap: () {
                   Navigator.of(context).pushNamed(SettingsPage.routeName);
@@ -197,14 +191,13 @@ class _MyDrawerState extends State<MyDrawer> {
                 ),
                 title: Text(
                   'About',
-                  style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyMedium!.color,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const AboutPageScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const AboutPageScreen()),
                   );
                 },
               ),
@@ -215,9 +208,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 ),
                 title: Text(
                   'Help & Support',
-                  style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyMedium!.color,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onTap: () {
                   // Handle navigation to help and support
@@ -230,9 +221,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 ),
                 title: Text(
                   'Logout',
-                  style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyMedium!.color,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onTap: () async {
                   shouldLogout = await showDialog(

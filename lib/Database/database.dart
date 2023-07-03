@@ -58,6 +58,16 @@ class DatabaseHelper {
     return null;
   }
 
+  static Future<void> updateUser(User user) async {
+    final db = await database;
+    await db.update(
+      'users',
+      user.toMap(),
+      where: 'email = ?',
+      whereArgs: [user.email],
+    );
+  }
+
   static Future<void> deleteUserByEmail(String email) async {
     final db = await database;
     await db.delete(

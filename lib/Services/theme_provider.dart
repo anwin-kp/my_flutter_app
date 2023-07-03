@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider extends ChangeNotifier {
   bool _isDarkModeEnabled = false;
@@ -7,8 +8,16 @@ class ThemeProvider extends ChangeNotifier {
 
   ThemeData get currentTheme => _isDarkModeEnabled ? darkTheme : lightTheme;
 
-  void setDarkMode(bool value) {
+  Future<void> loadThemePreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _isDarkModeEnabled = prefs.getBool('isDarkModeEnabled') ?? false;
+    notifyListeners();
+  }
+
+  void setDarkMode(bool value) async {
     _isDarkModeEnabled = value;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isDarkModeEnabled', value);
     notifyListeners();
   }
 
@@ -74,7 +83,7 @@ class ThemeProvider extends ChangeNotifier {
 
   ThemeData get lightTheme => ThemeData.light().copyWith(
         primaryColor: Colors.white,
-        scaffoldBackgroundColor: const Color.fromARGB(255, 199, 249, 204),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 192, 253, 255),
         appBarTheme: const AppBarTheme(
           color: Colors.white,
           elevation: 0,
@@ -96,7 +105,10 @@ class ThemeProvider extends ChangeNotifier {
             fontSize: 15,
           ),
           titleLarge: TextStyle(
-              color: Colors.purple, fontWeight: FontWeight.bold, fontSize: 25),
+            color: Colors.purple,
+            fontWeight: FontWeight.bold,
+            fontSize: 25,
+          ),
           titleMedium: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -113,12 +125,12 @@ class ThemeProvider extends ChangeNotifier {
             fontSize: 25,
           ),
           displayLarge: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontWeight: FontWeight.normal,
             fontSize: 16,
           ),
           displayMedium: TextStyle(
-            color: Color.fromARGB(255, 199, 249, 204),
+            color: Color.fromARGB(255, 192, 253, 255),
             fontWeight: FontWeight.normal,
             fontSize: 16,
           ),

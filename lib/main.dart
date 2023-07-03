@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_flutter_app/Screens/about_screen.dart';
@@ -12,9 +13,13 @@ import 'Screens/login_screen.dart';
 import 'Screens/splash_screen.dart';
 import 'Services/provider_service.dart';
 import 'Services/theme_provider.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   //Setting Device orientation
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -45,25 +50,37 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => UserProvider(),
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Ev Charging App',
-          theme: Provider.of<ThemeProvider>(context).currentTheme,
-          initialRoute: '/',
-          // Routes For Navigation
-          routes: {
-            '/': (ctx) => const SplashScreen(),
-            LoginScreen.routeName: (ctx) => const LoginScreen(),
-            HomeScreen.routeName: (ctx) => const HomeScreen(),
-            RegistrationScreen.routeName: (ctx) => const RegistrationScreen(),
-            SettingsPage.routeName: (ctx) => const SettingsPage(),
-            AboutPageScreen.routeName: (ctx) => const AboutPageScreen(),
-            ProfilePageScreen.routeName: (ctx) =>  ProfilePageScreen(
-                  email: Provider.of<UserProvider>(context).loggedInEmail,
-                ),
-          }),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ThemeProvider>(
+          create: (_) => ThemeProvider()..loadThemePreference(),
+        ),
+        ChangeNotifierProvider<UserProvider>(
+          create: (_) => UserProvider(),
+        ),
+      ],
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, _) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Ev Charging App',
+            theme: themeProvider.currentTheme,
+            initialRoute: '/',
+            // Routes For Navigation
+            routes: {
+              '/': (ctx) => const SplashScreen(),
+              LoginScreen.routeName: (ctx) => const LoginScreen(),
+              HomeScreen.routeName: (ctx) => const HomeScreen(),
+              RegistrationScreen.routeName: (ctx) => const RegistrationScreen(),
+              SettingsPage.routeName: (ctx) => const SettingsPage(),
+              AboutPageScreen.routeName: (ctx) => const AboutPageScreen(),
+              ProfilePageScreen.routeName: (ctx) => ProfilePageScreen(
+                    email: Provider.of<UserProvider>(context).loggedInEmail,
+                  ),
+            },
+          );
+        },
+      ),
     );
   }
 }
